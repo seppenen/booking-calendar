@@ -21,18 +21,22 @@ const DayWrapper = styled.div`
   display: flex;
   justify-content: center;
 `
+const test = (timeItem) => {
+
+    console.log(timeItem.format())
+}
 const CalendarBody = ({startDay, startHour}) => {
 
-    const timeArray = [...Array(34)]
-        .map(()=> startHour.add(15, 'minutes')
-            .clone().subtract(15,'minutes'))
+    const timeArray = [...Array(24)]
+        .map(()=> startHour.add(30, 'minutes')
+            .clone().subtract(30,'minutes'))
 
     const days = [...Array(7)]
         .map(()=> startDay.add(1,'day')
             .clone()
             .subtract(1,'days'))
 
-console.log(timeArray)
+
     return(
         <>
 
@@ -47,7 +51,9 @@ console.log(timeArray)
                             timeArray.map((timeItem ) => (
 
                                 <TimeCellWrapper key={timeItem}>
-                                  {timeItem.zone(5).format('HH:mm')}
+                                  <button onClick={()=>test(timeItem)}>
+                                      {timeItem.zone(9).format('HH:mm')}
+                                  </button>
                                 </TimeCellWrapper>
                             ))
                         }
