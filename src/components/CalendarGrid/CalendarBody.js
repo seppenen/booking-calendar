@@ -49,7 +49,7 @@ const CalendarBody = ({startDay}) => {
                                 <TimeCellWrapper key={timeItem.format()}>
                                     {increaseDay(timeItem)}
                                   <button value={timeItem.unix()} onClick={(e)=>selectDay(e)}>
-                                   {timeItem.format('dd Do HH:mm')}
+                                   {timeItem.format('HH:mm')}
                                   </button>
                                 </TimeCellWrapper>
                             ))
