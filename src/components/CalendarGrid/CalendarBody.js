@@ -36,7 +36,6 @@ const CalendarBody = ({startDay, startHour}) => {
             .clone()
             .subtract(1,'days'))
 
-
     return(
         <>
 
