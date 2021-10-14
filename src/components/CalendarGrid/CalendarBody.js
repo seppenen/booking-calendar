@@ -52,7 +52,7 @@ const CalendarBody = ({startDay, startHour}) => {
 
                                 <TimeCellWrapper key={timeItem}>
                                   <button onClick={()=>test(timeItem)}>
-                                      {timeItem.zone(9).format('HH:mm')}
+                                      {dayItem.format('dd')} {timeItem.format('HH:mm')}
                                   </button>
                                 </TimeCellWrapper>
                             ))

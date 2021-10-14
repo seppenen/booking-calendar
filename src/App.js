@@ -12,8 +12,9 @@ function App() {
 
 
   moment.updateLocale('en', {week: {dow:1}})
+  moment.utc()
   const startDay = moment().startOf('week')
-  const startHour = moment().startOf('minutes').hour('08').minute('00')
+  const startHour = moment().startOf('minutes').hour('-3').minute('00')
 
   return (
     <>
