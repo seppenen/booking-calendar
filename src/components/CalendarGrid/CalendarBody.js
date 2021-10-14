@@ -1,6 +1,7 @@
-import React from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
-import HeaderBody from "../Header/HeaderBody";
+
+import moment from "moment";
 
 const GridWrapper = styled.div`
   display: grid;
@@ -21,24 +22,21 @@ const DayWrapper = styled.div`
   display: flex;
   justify-content: center;
 `
-const test = (timeItem) => {
 
-    console.log(timeItem.format())
-}
-const CalendarBody = ({startDay, startHour}) => {
 
-    const timeArray = [...Array(24)]
-        .map(()=> startHour.add(30, 'minutes')
-            .clone().subtract(30,'minutes'))
+const CalendarBody = ({startDay}) => {
 
-    const days = [...Array(7)]
-        .map(()=> startDay.add(1,'day')
-            .clone()
-            .subtract(1,'days'))
+    const startHour = moment().startOf('week').hour('9').minute('00').subtract(1,'days')
+    const [selectedDay, setSelectedDay] = useState(moment().unix())
+
+    const timeArray = [...Array(24)].map(()=> startHour.add(30, 'minutes').clone())
+    const days = [...Array(7)].map(()=> startDay.add(1,'day').clone())
+
+    const selectDay = (e) => setSelectedDay(e.target.value)
+    const increaseDay = (timeItem) => {timeItem.add(1,'day')}
 
     return(
         <>
-
         <GridWrapper>
             {
                 days.map((dayItem ) => (
@@ -47,11 +45,11 @@ const CalendarBody = ({startDay, startHour}) => {
                        {dayItem.format('dddd')}
                         </DayWrapper>
                         {
-                            timeArray.map((timeItem ) => (
-
-                                <TimeCellWrapper key={timeItem}>
-                                  <button onClick={()=>test(timeItem)}>
-                                      {dayItem.format('dd')} {timeItem.format('HH:mm')}
+                            timeArray.map((timeItem  ) => (
+                                <TimeCellWrapper key={timeItem.format()}>
+                                    {increaseDay(timeItem)}
+                                  <button value={timeItem.unix()} onClick={(e)=>selectDay(e)}>
+                                   {timeItem.format('dd Do HH:mm')}
                                   </button>
                                 </TimeCellWrapper>
                             ))

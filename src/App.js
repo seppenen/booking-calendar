@@ -12,14 +12,14 @@ function App() {
 
 
   moment.updateLocale('en', {week: {dow:1}})
-  moment.utc()
-  const startDay = moment().startOf('week')
-  const startHour = moment().startOf('minutes').hour('-3').minute('00')
+
+  const startDay = moment().startOf('week').subtract(1,'days')
 
   return (
     <>
       <HeaderBody/>
-    <CalendarBody startDay={startDay} startHour={startHour}/>
+
+    <CalendarBody startDay={startDay} />
     </>
   );
 }
