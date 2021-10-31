@@ -6,12 +6,20 @@ margin: 15px;
 `;
 
 
-const HeaderBody = () => {
+const HeaderBody = ({startDay, setStartDay}) => {
 
+    const onNextWeek = () => {
+        setStartDay(startDay.add(1,'week').clone())
+    }
+
+    const onPreviousWeek = () => {
+        setStartDay(startDay.subtract(1,'week').clone())
+    }
 
     return(
         <ControlWrapper>
-            Calendar controls
+            <button onClick={() => onPreviousWeek()}>Previous week</button>
+            <button onClick={() => onNextWeek()}>Next week</button>
         </ControlWrapper>
     )
 }

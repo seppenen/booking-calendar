@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import styled from "styled-components";
 
 import moment from "moment";
@@ -11,6 +11,7 @@ const GridWrapper = styled.div`
   `;
 
 const TimeCellWrapper = styled.div`
+  
   height: 20px;
   padding: 10px;
   background-color: #dddd;
@@ -48,14 +49,17 @@ const TimeSheetWrapper = styled.div`
 
 const CalendarBody = ({startDay}) => {
 
-    const startHour = moment().startOf('week').hour('9').minute('00').subtract(1,'days').subtract(30,'minutes')
     const [selectedDay, setSelectedDay] = useState(moment().unix())
+
+    const startHour = startDay.startOf('week').hour('9').minute('00').subtract(1,'days').subtract(30,'minutes')
 
     const timeArray = [...Array(24)].map(()=> startHour.add(30, 'minutes').clone())
     const days = [...Array(7)].map(()=> startDay.add(1,'day').clone())
 
     const selectDay = (e) => setSelectedDay(e.target.value)
-    const increaseDay = (timeItem) => {timeItem.add(1,'day')}
+    const nextDay = (timeItem) => {timeItem.add(1,'day')}
+
+
 
     return(
         <>
@@ -64,7 +68,6 @@ const CalendarBody = ({startDay}) => {
             <SideWrapper>
                 <DayWrapper>
                     Week {moment().week()}
-
                 </DayWrapper>
                 {
                     timeArray.map((timeItem  ) => (
@@ -84,10 +87,10 @@ const CalendarBody = ({startDay}) => {
                         {
                             timeArray.map((timeItem  ) => (
                                 <TimeCellWrapper key={timeItem.unix()}>
-                                    {increaseDay(timeItem)}
-                                  <button value={timeItem.unix()} onClick={(e)=>selectDay(e)}>
-                                      Available  {/*{timeItem.format("LLL")}*/}
-                                  </button>
+                                    {nextDay(timeItem)}
+
+                                        {timeItem.format("LLL")}
+
 
                                 </TimeCellWrapper>
                             ))
