@@ -1,28 +1,24 @@
-
 import './App.css';
 import CalendarBody from "./components/CalendarGrid/CalendarBody";
 import moment from "moment";
-import HeaderBody from "./components/Header/HeaderBody";
 import React, {useState} from "react";
 import 'moment/locale/fi';
 import 'moment/locale/cs';
-
+import ControlsBody from "./components/Controls/ControlsBody";
 
 function App() {
 
+    moment.updateLocale('en', {week: {dow: 1}})
 
-  moment.updateLocale('en', {week: {dow:1}})
-
-  const [startDay, setStartDay ] = useState(moment().subtract(1,'days'))
+    const [startDay, setStartDay] = useState(moment().subtract(1, 'days'))
 
 
-  return (
-    <>
-      <HeaderBody  startDay={startDay} setStartDay={setStartDay}/>
-
-    <CalendarBody startDay={startDay} />
-    </>
-  );
+    return (
+        <>
+            <ControlsBody startDay={startDay} setStartDay={setStartDay}/>
+            <CalendarBody startDay={startDay}/>
+        </>
+    );
 }
 
 export default App;
