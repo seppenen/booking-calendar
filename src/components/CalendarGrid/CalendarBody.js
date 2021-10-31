@@ -68,7 +68,7 @@ const CalendarBody = ({startDay}) => {
 
                 <SideWrapper>
                     <DayWrapper>
-                        Week {moment().week()}
+                        Week {startDay.week()}
                     </DayWrapper>
                     {
                         timeArray.map((timeItem) => (
@@ -89,7 +89,7 @@ const CalendarBody = ({startDay}) => {
                                     timeArray.map((timeItem) => (
                                         <TimeCellWrapper key={timeItem.unix()}>
                                             {nextDay(timeItem)}
-                                            {timeItem.format("LLL")}
+                                            {timeItem.format("MMM Do")}
                                         </TimeCellWrapper>
                                     ))
                                 }
